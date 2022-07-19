@@ -1,0 +1,1 @@
+obj-y += fu_i2c.o

@@ -1,0 +1,1 @@
+obj-y += fu_wifi.o
