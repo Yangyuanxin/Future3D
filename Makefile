@@ -1,4 +1,3 @@
-#指定编译器
 CROSS_COMPILE = 
 AS		= $(CROSS_COMPILE)as
 LD		= $(CROSS_COMPILE)ld
@@ -11,24 +10,42 @@ STRIP		= $(CROSS_COMPILE)strip
 OBJCOPY		= $(CROSS_COMPILE)objcopy
 OBJDUMP		= $(CROSS_COMPILE)objdump
 
-#导出各个编译参数的变量
 export AS LD CC CPP AR NM
 export STRIP OBJCOPY OBJDUMP
 
-#编译参数
 CFLAGS := -std=gnu99 -Wall -O3 -g -Wno-discarded-qualifiers
 
-#指定头文件(.h文件)的路径
 CFLAGS += -I $(shell pwd)/App/
-CFLAGS += -I $(shell pwd)/Common/
-CFLAGS += -I $(shell pwd)/Common/Log/
-CFLAGS += -I $(shell pwd)/Common/DataStruct/
-CFLAGS += -I $(shell pwd)/Middle/Linux/Device/Bsp/
-CFLAGS += -I $(shell pwd)/Middle/Linux/Device/Driver/
-CFLAGS += -I $(shell pwd)/ThirdPart/Json/
-CFLAGS += -I $(shell pwd)/Middle/MiddleWare/
+CFLAGS += -I $(shell pwd)/Bsp/gpio/
+CFLAGS += -I $(shell pwd)/Bsp/i2c/
+CFLAGS += -I $(shell pwd)/Bsp/spi/
+CFLAGS += -I $(shell pwd)/Bsp/time/
+CFLAGS += -I $(shell pwd)/Bsp/uart/
+CFLAGS += -I $(shell pwd)/Bsp/msq/
+CFLAGS += -I $(shell pwd)/Bsp/mutex/
+CFLAGS += -I $(shell pwd)/Bsp/pipe/
+CFLAGS += -I $(shell pwd)/Bsp/pthread/
+CFLAGS += -I $(shell pwd)/Bsp/socket/
 
-#指定库文件的位置
+CFLAGS += -I $(shell pwd)/Business/file_manage/
+CFLAGS += -I $(shell pwd)/Business/gcode_parser/
+CFLAGS += -I $(shell pwd)/Business/gui_handler/
+CFLAGS += -I $(shell pwd)/Business/mqtt_manage/
+
+CFLAGS += -I $(shell pwd)/Hardward/Led/
+CFLAGS += -I $(shell pwd)/Hardward/Lcd/
+CFLAGS += -I $(shell pwd)/Hardward/Key/
+CFLAGS += -I $(shell pwd)/Hardward/Wifi/
+CFLAGS += -I $(shell pwd)/Hardward/Udisk/
+CFLAGS += -I $(shell pwd)/Hardward/Camera/
+
+CFLAGS += -I $(shell pwd)/Thirdparty/cJSON/
+
+CFLAGS += -I $(shell pwd)/Tool/Json/
+CFLAGS += -I $(shell pwd)/Tool/Log/
+CFLAGS += -I $(shell pwd)/Tool/Mqtt/
+CFLAGS += -I $(shell pwd)/Tool/Ringbuffer/
+
 LDFLAGS := -lpthread -lm -g
 
 export CFLAGS LDFLAGS
@@ -36,11 +53,8 @@ export CFLAGS LDFLAGS
 TOPDIR := $(shell pwd)
 export TOPDIR
 
-#编译生成的目标文件
-TARGET := AcDazzle_app
+TARGET := Future3D_app
 
-#表示要进入相应的子目录下去寻找文件来编进程序里
-#这是由子目录下的Makefile来决定的
 obj-y += $(shell pwd)/App/
 obj-y += $(shell pwd)/Common/Log/
 obj-y += $(shell pwd)/Common/DataStruct/
@@ -49,9 +63,40 @@ obj-y += $(shell pwd)/Middle/Linux/Device/Driver/
 obj-y += $(shell pwd)/ThirdPart/Json/
 obj-y += $(shell pwd)/Middle/MiddleWare/
 
+obj-y += $(shell pwd)/App/
+obj-y += $(shell pwd)/Bsp/gpio/
+obj-y += $(shell pwd)/Bsp/i2c/
+obj-y += $(shell pwd)/Bsp/spi/
+obj-y += $(shell pwd)/Bsp/time/
+obj-y += $(shell pwd)/Bsp/uart/
+obj-y += $(shell pwd)/Bsp/msq/
+obj-y += $(shell pwd)/Bsp/mutex/
+obj-y += $(shell pwd)/Bsp/pipe/
+obj-y += $(shell pwd)/Bsp/pthread/
+obj-y += $(shell pwd)/Bsp/socket/
+
+obj-y += $(shell pwd)/Business/file_manage/
+obj-y += $(shell pwd)/Business/gcode_parser/
+obj-y += $(shell pwd)/Business/gui_handler/
+obj-y += $(shell pwd)/Business/mqtt_manage/
+
+obj-y += $(shell pwd)/Hardward/Led/
+obj-y += $(shell pwd)/Hardward/Lcd/
+obj-y += $(shell pwd)/Hardward/Key/
+obj-y += $(shell pwd)/Hardward/Wifi/
+obj-y += $(shell pwd)/Hardward/Udisk/
+obj-y += $(shell pwd)/Hardward/Camera/
+
+obj-y += $(shell pwd)/Thirdparty/cJSON/
+
+obj-y += $(shell pwd)/Tool/Json/
+obj-y += $(shell pwd)/Tool/Log/
+obj-y += $(shell pwd)/Tool/Mqtt/
+obj-y += $(shell pwd)/Tool/Ringbuffer/
+
 
 all : start_recursive_build $(TARGET)
-	@echo $(TARGET) has been built!
+	@echo $(TARGET) Future3D_app built success!
 	@echo
 	@echo $(shell find -name "*.o")
 	@echo
