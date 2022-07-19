@@ -1,0 +1,1 @@
+obj-y += fu_pipe.o
